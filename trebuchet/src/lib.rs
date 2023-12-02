@@ -1,3 +1,6 @@
+/**
+* Day 1, Part 1
+*/
 use std::fs::File;
 use std::io::{BufRead, self};
 
