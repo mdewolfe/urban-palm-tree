@@ -5,7 +5,7 @@ use std::fs::File;
 use std::io::{BufRead, self};
 
 pub fn go() -> u32 {
-    let file = File::open("./trebuchet.input.txt").unwrap();
+    let file = File::open("./trebuchet/trebuchet.input.txt").unwrap();
 
     let mut sum: u32 = 0;
     for line in io::BufReader::new(file).lines() {
