@@ -91,6 +91,7 @@ impl Game {
 
         let rounds: Vec<String> = game_info[1].split("; ").map(|s| s.to_string()).collect();
         let game_rounds: Vec<Round> = Round::from_lines(rounds);
+
         let mut min_red: u32 = 0;
         let mut min_green: u32 = 0;
         let mut min_blue: u32 = 0;

@@ -4,6 +4,7 @@
 */
 use std::fs::File;
 use std::io::{self, BufRead};
+use std::usize;
 
 #[allow(dead_code)]
 #[derive(Debug)]
@@ -25,8 +26,48 @@ pub fn go() -> Trebuchet {
     return Trebuchet { sum };
 }
 
+fn filter_input(input: String) -> String {
+    let mut idx: usize = 0;
+    let temp: &str = input.as_str();
+    let length: usize = temp.len();
+
+    let mut filtered: String = String::new();
+    while idx < length {
+        let reduced: &str = &temp[idx..];
+        if reduced.starts_with("one") {
+            filtered += "1";
+        } else if reduced.starts_with("two") {
+            filtered += "2";
+        } else if reduced.starts_with("three") {
+            filtered += "3";
+        } else if reduced.starts_with("four") {
+            filtered += "4";
+        } else if reduced.starts_with("five") {
+            filtered += "5";
+        } else if reduced.starts_with("six") {
+            filtered += "6";
+        } else if  reduced.starts_with("seven") {
+            filtered += "7";
+        } else if reduced.starts_with("eight") {
+            filtered += "8";
+        } else if reduced.starts_with("nine") {
+            filtered += "9";
+        } else  {
+            let r = reduced.chars().nth(0).unwrap();
+            if r.is_digit(10) {
+               filtered.push(r);
+            }
+        }
+
+        idx += 1;
+    }
+
+    return filtered;
+}
+
 fn find_calibration(calibration: String) -> u32 {
-    let filtered: String = calibration.chars().filter(|c| c.is_digit(10)).collect();
+    let reduced: String = filter_input(calibration);
+    let filtered: String = reduced.chars().filter(|c| c.is_digit(10)).collect();
     if filtered.len() == 0 {
         return 0;
     }
@@ -42,6 +83,42 @@ fn find_calibration(calibration: String) -> u32 {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn test_filter_input() {
+        let s: String = String::from("two1nine");
+        let result: String = filter_input(s);
+        assert_eq!(result, String::from("219"));
+    }
+
+    #[test]
+    fn test_calibrate_reduces_one() {
+        let s: String = String::from("two1nine");
+        let result: u32 = find_calibration(s);
+        assert_eq!(result, 29);
+    }
+
+    #[test]
+    fn test_filte_input_two() {
+        let s: String = String::from("eightwothree");
+        let result: String = filter_input(s);
+        assert_eq!(result, "823");
+    }
+
+    #[test]
+    fn test_file_input_three() {
+        let s: String = String::from("zoneight234");
+        let result: String = filter_input(s);
+        assert_eq!(result, "18234");
+    }
+
+
+    #[test]
+    fn test_calibrate_redices_two() {
+        let s: String = String::from("zoneight234");
+        let result: u32 = find_calibration(s);
+        assert_eq!(result, 14);
+    }
 
     #[test]
     fn find_caligration_one() {
