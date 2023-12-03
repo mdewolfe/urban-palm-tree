@@ -5,7 +5,13 @@
 use std::fs::File;
 use std::io::{BufRead, self};
 
-pub fn go() -> u32 {
+#[allow(dead_code)]
+#[derive(Debug)]
+pub struct Trebuchet {
+    sum: u32,
+}
+
+pub fn go() -> Trebuchet {
     let file = File::open("./trebuchet/trebuchet.input.txt").unwrap();
 
     let mut sum: u32 = 0;
@@ -16,7 +22,7 @@ pub fn go() -> u32 {
         }
     }
 
-    return sum;
+    return Trebuchet { sum };
 }
 
 fn find_calibration(calibration: String) -> u32 {
