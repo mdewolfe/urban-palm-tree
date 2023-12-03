@@ -1,7 +1,7 @@
-use trebuchet;
-use trebuchet::Trebuchet;
 use cube_conundrum;
 use cube_conundrum::CubeResult;
+use trebuchet;
+use trebuchet::Trebuchet;
 
 fn main() {
     let trebuchet_result: Trebuchet = trebuchet::go();

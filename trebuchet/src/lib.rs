@@ -3,7 +3,7 @@
 * Trebuchet
 */
 use std::fs::File;
-use std::io::{BufRead, self};
+use std::io::{self, BufRead};
 
 #[allow(dead_code)]
 #[derive(Debug)]
@@ -26,15 +26,13 @@ pub fn go() -> Trebuchet {
 }
 
 fn find_calibration(calibration: String) -> u32 {
-    let filtered: String = calibration.chars().filter(|c| {
-        c.is_digit(10)
-    }).collect();
+    let filtered: String = calibration.chars().filter(|c| c.is_digit(10)).collect();
     if filtered.len() == 0 {
         return 0;
     }
 
     let as_chars: Vec<char> = filtered.chars().collect();
-    let x: String = [as_chars[0], as_chars[as_chars.len()-1]].iter().collect();
+    let x: String = [as_chars[0], as_chars[as_chars.len() - 1]].iter().collect();
     match x.parse::<u32>() {
         Ok(value) => return value,
         _ => return 0,
@@ -122,7 +120,6 @@ mod tests {
         for c in calibrations {
             let x: u32 = find_calibration(c);
             sum += x;
-
         }
 
         assert_eq!(sum, 142);
