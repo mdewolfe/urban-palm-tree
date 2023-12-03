@@ -1,5 +1,6 @@
 /**
 * Day 1, Part 1
+* Trebuchet
 */
 use std::fs::File;
 use std::io::{BufRead, self};

@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 trebuchet =  { path = "../trebuchet/" }
+cube-conundrum = { path = "../cube-conundrum/" }
