@@ -5,4 +5,5 @@ members = [
   "trebuchet",
   "cube-conundrum",
   "gear_ratios",
+  "scratchcards",
 ]
