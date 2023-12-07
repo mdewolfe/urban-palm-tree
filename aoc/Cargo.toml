@@ -10,3 +10,4 @@ trebuchet =  { path = "../trebuchet/" }
 cube-conundrum = { path = "../cube-conundrum/" }
 gear_ratios = { path = "../gear_ratios/"}
 scratchcards = { path = "../scratchcards/"}
+seeds = { path = "../seeds/" }

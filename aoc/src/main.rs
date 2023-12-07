@@ -6,12 +6,14 @@ use gear_ratios;
 use gear_ratios::GearRatio;
 use scratchcards;
 use scratchcards::ScratchResult;
+use seeds;
 
 fn main() {
-    day_one();
-    day_two();
+    // day_one();
+    // day_two();
     day_three();
-    day_four();
+    // day_four();
+    // day_five();
 }
 
 fn day_one() {
@@ -32,4 +34,8 @@ fn day_three() {
 fn day_four() {
     let scratch_result: ScratchResult = scratchcards::go();
     println!("Day 4, Scratch Cards: {:?}", scratch_result);
+}
+
+fn day_five() {
+    todo!();
 }

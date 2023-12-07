@@ -188,8 +188,52 @@ struct Token {
     token_type: Type,
 }
 
+/*
+"4nnx.114..
+..x*x.....
+..nnx.633.
+......#...
+617*......
+.....+.58.
+..592.....
+......755.
+...$.*....
+.664.598..
+";
+*/
+
+#[derive(Debug)]
+struct MyBox {
+    x1: i32,
+    y1: i32,
+    x2: i32,
+    y2: i32,
+}
+
+impl MyBox {
+    fn is_in(&self, other: &MyBox) -> bool {
+        if other.y2 < self.y1 {
+            return false;
+        }
+
+        if other.y2 > self.y1 {
+            return false;
+        }
+
+        if other.x2 < self.x1 {
+            return false;
+        }
+
+        if other.x1 > self.x2 {
+            return false
+        }
+
+        return true;
+    }
+}
+
 impl Token {
-    fn collides(&self, other: &Token) -> bool {
+    fn hits(&self, other: &Token) -> bool {
         if other.y < self.y - 1 || other.y > self.y + 1 {
             return false;
         }
@@ -199,6 +243,10 @@ impl Token {
         }
 
         return true;
+    }
+
+    fn my_box(&self) -> MyBox {
+        return MyBox{ x1: self.x -1, y1: self.y - 1, x2: self.xx + 1, y2: self.y + 1 };
     }
 }
 
@@ -244,12 +292,12 @@ fn find_gear_pairs(tokens: &Vec<Token>) -> Vec<GearPair> {
     for gear in gears {
         let mut temp: Vec<&Token> = Vec::new();
         for n in &numbers {
-            if gear.collides(n) {
+            if gear.hits(n) {
                 temp.push(n);
             }
         }
 
-        if temp.len() >= 2 {
+        if temp.len() == 2 {
             pairs.push(GearPair{ value_1: temp[0].clone(), value_2: temp[1].clone() });
         }
     }
@@ -277,9 +325,10 @@ mod teststwo {
 .664.598..
 ";
         let lines: Vec<Vec<char>> = build_input(raw.to_string());
-        let gears: Vec<Token> = find_tokens(&lines);
+        let tokens: Vec<Token> = find_tokens(&lines);
+        let gears: Vec<Token> = tokens.into_iter().filter(|g| g.token_type == Type::Gear).collect();
         assert_eq!(gears, vec![
-            Token {value: 0, y: 1, x: 0, xx: 3, token_type: Type::Gear },
+            Token {value: 0, y: 1, x: 3, xx: 3, token_type: Type::Gear },
             Token {value: 0, y: 4, x: 3, xx: 3, token_type: Type::Gear },
             Token {value: 0, y: 8, x: 5, xx: 5, token_type: Type::Gear },
         ]);
@@ -290,6 +339,9 @@ mod teststwo {
     fn test_find_numbers() {
 
         let raw: &str =
+/*
+0123456789
+************/
 "467..114..
 ...*......
 ..35..633.

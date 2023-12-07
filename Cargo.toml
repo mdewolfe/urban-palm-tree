@@ -6,4 +6,6 @@ members = [
   "cube-conundrum",
   "gear_ratios",
   "scratchcards",
+  "seeds",
+  "daysix",
 ]
